@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morgan MTB Race Team Inc. - Donate</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#fff;color:#333}
+nav{background:#8B1A1A;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.logo{color:#fff;font-size:1.1rem;font-weight:700;letter-spacing:.5px;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:.5rem}
+nav a.nav-link{color:rgba(255,255,255,.7);font-size:.85rem;text-decoration:none;padding:.3rem .6rem;border-radius:4px;font-weight:600}
+nav a.nav-link:hover{color:#fff}
+nav a.admin-link{color:rgba(255,255,255,.7);font-size:.8rem;text-decoration:none;border:1px solid rgba(255,255,255,.4);padding:.3rem .8rem;border-radius:4px}
+nav a.admin-link:hover{color:#fff;border-color:#fff}
+.hero{background:linear-gradient(135deg,#8B1A1A 0%,#6b1313 100%);color:#fff;text-align:center;padding:3.5rem 1rem 3rem}
+.hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+.hero p{opacity:.88;max-width:520px;margin:.5rem auto 0;line-height:1.6;font-size:1rem}
+.bike-icon{font-size:2.5rem;margin-bottom:.5rem}
+.card-wrap{max-width:580px;margin:-1.5rem auto 3rem;padding:0 1rem}
+.card{background:#fff;border-radius:12px;box-shadow:0 6px 32px rgba(0,0,0,.12);padding:2rem}
+.card h2{color:#8B1A1A;font-size:1.2rem;margin-bottom:1.4rem;border-bottom:2px solid #f0e0e0;padding-bottom:.7rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.form-group{margin-bottom:1.1rem}
+label{font-size:.82rem;font-weight:600;color:#555;display:block;margin-bottom:.3rem}
+input,textarea,select{width:100%;padding:.65rem .85rem;border:1.5px solid #ddd;border-radius:7px;font-size:.95rem;font-family:inherit;background:#fff}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#8B1A1A}
+.amount-wrap{position:relative}
+.amount-wrap span{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:#888;font-weight:600}
+.amount-wrap input{padding-left:1.8rem}
+.btn-primary{width:100%;background:#8B1A1A;color:#fff;border:none;padding:.85rem;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;letter-spacing:.3px;margin-top:.5rem;display:block}
+.btn-primary:hover{background:#6b1313}
+.required{color:#8B1A1A}
+.optional-tag{font-weight:400;color:#aaa;font-size:.75rem}
+.type-toggle{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.4rem}
+.type-option{border:2px solid #ddd;border-radius:10px;padding:1rem;text-align:center;cursor:pointer;background:#fff;transition:.2s}
+.type-option:hover{border-color:#8B1A1A;background:#fdf5f5}
+.type-option.selected{border-color:#8B1A1A;background:#fdf5f5;box-shadow:0 0 0 3px rgba(139,26,26,.1)}
+.type-option .t-icon{font-size:1.6rem;margin-bottom:.4rem}
+.type-option .t-label{font-size:.9rem;font-weight:700;color:#333}
+.type-option .t-sub{font-size:.75rem;color:#888;margin-top:.2rem}
+.tier-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;margin-bottom:1.2rem}
+.tier-card{border:2px solid #ddd;border-radius:10px;padding:1rem;cursor:default;background:#fff;text-align:center}
+.tier-card.selected{border-color:#8B1A1A;background:#fdf5f5;box-shadow:0 0 0 3px rgba(139,26,26,.1)}
+.tier-card-left{margin-bottom:.5rem}
+.tier-badge{display:inline-block;padding:.25rem .7rem;border-radius:20px;font-size:.75rem;font-weight:800;margin-bottom:.4rem;letter-spacing:.5px}
+.tier-badge.platinum{background:linear-gradient(135deg,#e8e0f0,#c9b8e8);color:#4a2d82}
+.tier-badge.gold{background:linear-gradient(135deg,#fff3cd,#ffd966);color:#7a5c00}
+.tier-badge.silver{background:linear-gradient(135deg,#e8e8e8,#c8c8c8);color:#444}
+.tier-badge.bronze{background:linear-gradient(135deg,#f5e6d3,#e8c49a);color:#7a4510}
+.tier-price{font-size:.78rem;font-weight:700;color:#8B1A1A;margin-bottom:.5rem}
+.tier-perks{text-align:left;font-size:.78rem;color:#555;line-height:1.8}
+.tier-perks li{list-style:none;padding-left:0}
+.tier-qualifier{font-size:.8rem;font-weight:700;text-align:center;padding:.4rem .8rem;border-radius:6px;margin-top:.5rem;margin-bottom:.8rem}
+.tier-qualifier.platinum{background:#e8e0f0;color:#4a2d82}
+.tier-qualifier.gold{background:#fff3cd;color:#7a5c00}
+.tier-qualifier.silver{background:#e8e8e8;color:#444}
+.tier-qualifier.bronze{background:#f5e6d3;color:#7a4510}
+.tier-qualifier.none{background:#fdf5f5;color:#888}
+.drive-box{background:#fdf5f5;border:2px dashed #8B1A1A;border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:1rem;text-align:center}
+.drive-box p{font-size:.88rem;color:#555;margin-bottom:.8rem;line-height:1.6}
+.drive-box a{display:inline-block;background:#8B1A1A;color:#fff;padding:.6rem 1.4rem;border-radius:7px;font-weight:700;font-size:.88rem;text-decoration:none}
+.drive-box a:hover{background:#6b1313}
+.drive-box .drive-note{font-size:.75rem;color:#999;margin-top:.6rem;display:block}
+.payment-methods{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1.4rem}
+.pm-option{border:2px solid #ddd;border-radius:10px;padding:1rem .5rem;text-align:center;cursor:pointer;background:#fff}
+.pm-option.selected{border-color:#8B1A1A;background:#fdf5f5}
+.pm-option .pm-icon{font-size:1.6rem;margin-bottom:.4rem}
+.pm-option .pm-label{font-size:.82rem;font-weight:700;color:#333}
+.pm-option .pm-sub{font-size:.72rem;color:#888;margin-top:.2rem;line-height:1.3}
+.pay-box{background:#fdf5f5;border-radius:10px;padding:1.2rem 1.4rem;margin-bottom:1.2rem;text-align:left}
+.pay-box .step-label{font-size:.95rem;font-weight:700;color:#8B1A1A;margin-bottom:.4rem}
+.pay-box p{font-size:.9rem;color:#444;line-height:1.6}
+.venmo-box{background:#fdf5f5;border:2px dashed #8B1A1A;border-radius:10px;padding:1.5rem;margin-bottom:1.2rem;text-align:center}
+.venmo-box .amount-big{font-size:2.4rem;font-weight:800;color:#8B1A1A}
+.venmo-box p{font-size:.9rem;color:#555;margin-top:.3rem}
+.venmo-handle{font-weight:700;color:#8B1A1A;font-size:1.05rem}
+.note-highlight{font-size:1rem;font-weight:700;color:#8B1A1A;background:#fff;border-radius:6px;padding:.5rem .8rem;display:inline-block;margin-top:.7rem}
+.btn-venmo{display:inline-flex;align-items:center;gap:.5rem;background:#008CFF;color:#fff;padding:.8rem 2rem;border-radius:8px;text-decoration:none;font-weight:700;font-size:1rem;border:none;cursor:pointer}
+.venmo-logo{font-size:1.1rem;font-weight:900;font-style:italic}
+.info-box{background:#fdf5f5;border-left:4px solid #8B1A1A;border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin-bottom:1.2rem}
+.info-box .info-title{font-size:1rem;font-weight:700;color:#8B1A1A;margin-bottom:.5rem}
+.info-box p{font-size:.9rem;color:#444;line-height:1.7}
+.info-box .payable{font-size:1rem;font-weight:700;color:#333;margin-top:.4rem}
+#admin-screen{display:none;max-width:960px;margin:2rem auto;padding:0 1rem 3rem}
+#login-screen{display:none;max-width:380px;margin:4rem auto;padding:0 1rem}
+#team-screen{display:none}
+.admin-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.admin-header h2{color:#8B1A1A;font-size:1.3rem}
+.settings-panel{background:#fff;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:1.4rem 1.6rem;margin-bottom:1.5rem}
+.settings-panel strong{color:#8B1A1A;display:block;margin-bottom:1rem;font-size:1rem}
+.settings-row{display:grid;grid-template-columns:1fr 1fr auto;gap:1rem;align-items:flex-end}
+.settings-row .s-group label{font-size:.82rem;font-weight:600;color:#555;display:block;margin-bottom:.3rem}
+.settings-row .s-group input{width:100%;padding:.6rem .85rem;border:1.5px solid #ddd;border-radius:7px;font-size:.95rem}
+.settings-btns{display:flex;flex-direction:column;gap:.5rem}
+.btn-sm{padding:.4rem .9rem;font-size:.82rem;border-radius:6px;border:none;cursor:pointer;font-weight:600;white-space:nowrap}
+.btn-outline{background:#fff;border:1.5px solid #8B1A1A;color:#8B1A1A}
+.btn-outline:hover{background:#8B1A1A;color:#fff}
+.btn-danger{background:#fff;border:1.5px solid #c0392b;color:#c0392b}
+.btn-danger:hover{background:#c0392b;color:#fff}
+table{width:100%;border-collapse:collapse;font-size:.88rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.08)}
+thead{background:#8B1A1A;color:#fff}
+th{padding:.75rem 1rem;text-align:left;font-weight:600}
+td{padding:.7rem 1rem;border-bottom:1px solid #f0e0e0;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fdf5f5}
+.badge{display:inline-block;padding:.25rem .65rem;border-radius:20px;font-size:.75rem;font-weight:700}
+.badge-pending{background:#fff3cd;color:#856404}
+.badge-verified{background:#d4edda;color:#155724}
+.badge-method{background:#e8e8e8;color:#555;margin-left:.3rem}
+.badge-platinum{background:#e8e0f0;color:#4a2d82;margin-left:.3rem}
+.badge-gold{background:#fff3cd;color:#7a5c00;margin-left:.3rem}
+.badge-silver{background:#e8e8e8;color:#444;margin-left:.3rem}
+.badge-bronze{background:#f5e6d3;color:#7a4510;margin-left:.3rem}
+.badge-personal{background:#e8f4f8;color:#1a5276;margin-left:.3rem}
+.btn-verify{background:#8B1A1A;color:#fff;border:none;padding:.35rem .8rem;border-radius:5px;font-size:.78rem;font-weight:700;cursor:pointer;margin-bottom:4px;display:block}
+.btn-verify:hover{background:#6b1313}
+.btn-resend{background:#555;color:#fff;border:none;padding:.35rem .8rem;border-radius:5px;font-size:.78rem;font-weight:700;cursor:pointer;display:block}
+.btn-resend:hover{background:#333}
+.empty-state{text-align:center;padding:3rem;color:#aaa}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat-card{background:#fff;border-radius:10px;padding:1.2rem;box-shadow:0 2px 12px rgba(0,0,0,.08);text-align:center}
+.stat-card .num{font-size:1.8rem;font-weight:800;color:#8B1A1A}
+.stat-card .lbl{font-size:.78rem;color:#888;margin-top:.2rem}
+.team-wrap{max-width:600px;margin:2.5rem auto 3rem;padding:0 1rem}
+.team-card{background:#fff;border-radius:12px;box-shadow:0 6px 32px rgba(0,0,0,.12);padding:2.5rem 2rem;text-align:center}
+.team-card h2{color:#8B1A1A;font-size:1.4rem;font-weight:800;margin-bottom:.4rem}
+.team-card .subtitle{color:#888;font-size:.95rem;margin-bottom:2rem}
+.goal-amounts{display:flex;justify-content:space-between;margin-bottom:.5rem}
+.goal-amounts span{font-size:.85rem;font-weight:600;color:#555}
+.goal-amounts .raised{color:#8B1A1A;font-size:1rem}
+.progress-track{background:#f0e0e0;border-radius:999px;height:28px;overflow:hidden;margin-bottom:.8rem}
+.progress-fill{background:linear-gradient(90deg,#8B1A1A,#c0392b);height:100%;border-radius:999px;transition:width 1s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:.6rem;min-width:2.5rem}
+.progress-fill span{color:#fff;font-size:.78rem;font-weight:700;white-space:nowrap}
+.goal-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.8rem}
+.goal-stat{background:#fdf5f5;border-radius:10px;padding:1rem .5rem}
+.goal-stat .g-num{font-size:1.4rem;font-weight:800;color:#8B1A1A}
+.goal-stat .g-lbl{font-size:.75rem;color:#888;margin-top:.2rem}
+.goal-message{margin-top:1.5rem;font-size:.95rem;color:#555;line-height:1.6}
+.donate-cta{display:inline-block;margin-top:1.5rem;background:#8B1A1A;color:#fff;padding:.8rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;text-decoration:none;border:none;cursor:pointer}
+.donate-cta:hover{background:#6b1313}
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#2d6a4f;color:#fff;padding:.8rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;box-shadow:0 4px 16px rgba(0,0,0,.2);z-index:999;opacity:0;transition:.3s;pointer-events:none}
+.toast.show{opacity:1}
+.toast.error{background:#8B1A1A}
+@media(max-width:600px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  table{font-size:.78rem}
+  th,td{padding:.5rem .6rem}
+  .payment-methods{grid-template-columns:1fr}
+  .goal-stats{grid-template-columns:1fr 1fr}
+  .settings-row{grid-template-columns:1fr}
+  .tier-cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#" id="nav-logo">Morgan MTB Race Team Inc.</a>
+  <div class="nav-links">
+    <a class="nav-link" href="#" id="nav-team">Our Team</a>
+    <a class="admin-link" href="#" id="nav-admin">Admin</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home-screen">
+  <div class="hero">
+    <div class="bike-icon">&#x1F6B5;</div>
+    <h1>Support Our Riders</h1>
+    <p>Morgan MTB has been a top Utah NICA team since 2012. This 100% volunteer-run 501(c)3 non-profit team depends on community support to keep our riders on the trails. Your donation funds equipment, training, and financial assistance for our student athletes as they chase another great season representing our community.</p>
+  </div>
+  <div class="card-wrap">
+    <div class="card">
+      <h2>Make a Donation</h2>
+      <div id="donation-form-wrap">
+
+        <div class="form-group">
+          <label>Donation Type <span class="required">*</span></label>
+          <div class="type-toggle">
+            <div class="type-option" id="type-personal">
+              <div class="t-icon">&#x1F464;</div>
+              <div class="t-label">Personal Donation</div>
+              <div class="t-sub">Individual contribution</div>
+            </div>
+            <div class="type-option" id="type-business">
+              <div class="t-icon">&#x1F3E2;</div>
+              <div class="t-label">Business Sponsorship</div>
+              <div class="t-sub">Sponsor the team</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="personal-fields" style="display:none">
+          <div class="form-group">
+            <label>Name (First and Last) <span class="required">*</span></label>
+            <input type="text" id="fname" placeholder="Jane Smith">
+          </div>
+        </div>
+
+        <div id="business-fields" style="display:none">
+          <div class="form-group">
+            <label>Company Name <span class="required">*</span></label>
+            <input type="text" id="company" placeholder="Acme Company">
+          </div>
+          <div class="form-group">
+            <label>Sponsorship Levels</label>
+            <div class="tier-cards">
+              <div class="tier-card" id="tier-platinum">
+                <div class="tier-card-left">
+                  <div class="tier-badge platinum">PLATINUM</div>
+                  <div class="tier-price">$1,000+</div>
+                </div>
+                <ul class="tier-perks">
+                  <li>Jersey logo</li>
+                  <li>Trailer sign</li>
+                  <li>Race banner</li>
+                  <li>Website listing</li>
+                  <li>Awards ceremony</li>
+                </ul>
+              </div>
+              <div class="tier-card" id="tier-gold">
+                <div class="tier-card-left">
+                  <div class="tier-badge gold">GOLD</div>
+                  <div class="tier-price">$750-$999</div>
+                </div>
+                <ul class="tier-perks">
+                  <li>Trailer sign</li>
+                  <li>Race banner</li>
+                  <li>Website listing</li>
+                  <li>Awards ceremony</li>
+                </ul>
+              </div>
+              <div class="tier-card" id="tier-silver">
+                <div class="tier-card-left">
+                  <div class="tier-badge silver">SILVER</div>
+                  <div class="tier-price">$500-$749</div>
+                </div>
+                <ul class="tier-perks">
+                  <li>Race banner</li>
+                  <li>Website listing</li>
+                  <li>Awards ceremony</li>
+                </ul>
+              </div>
+              <div class="tier-card" id="tier-bronze">
+                <div class="tier-card-left">
+                  <div class="tier-badge bronze">BRONZE</div>
+                  <div class="tier-price">$250-$499</div>
+                </div>
+                <ul class="tier-perks">
+                  <li>Website listing</li>
+                  <li>Awards ceremony</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="shared-fields" style="display:none">
+          <div class="form-group">
+            <label>Email Address <span class="required">*</span></label>
+            <input type="email" id="email" placeholder="jane@example.com">
+          </div>
+          <div class="form-group">
+            <label>Street Address <span class="required">*</span></label>
+            <input type="text" id="address" placeholder="123 Trail Way">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>City <span class="required">*</span></label>
+              <input type="text" id="city" placeholder="Denver">
+            </div>
+            <div class="form-group">
+              <label>State <span class="required">*</span></label>
+              <input type="text" id="state" placeholder="CO" maxlength="2">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>ZIP Code <span class="required">*</span></label>
+            <input type="text" id="zip" placeholder="80201" maxlength="10">
+          </div>
+          <div class="form-group">
+            <label>Donation Amount <span class="required">*</span></label>
+            <div class="amount-wrap">
+              <span>$</span>
+              <input type="number" id="amount" placeholder="50" min="1" step="any">
+            </div>
+            <div id="tier-qualifier" style="display:none;margin-top:.5rem"></div>
+          </div>
+          <div id="drive-box-wrap" style="display:none">
+            <div class="drive-box">
+              <p>Please upload your company logo to our shared Google Drive folder OR email your logo to <strong>morganmtbteam@gmail.com</strong></p>
+              <a href="https://drive.google.com/drive/folders/1zfJE_dCYlMnZkOCzTkso1d3BvKprEJst?usp=drive_link" target="_blank">Upload Logo to Google Drive</a>
+              <span class="drive-note">Accepted formats: PNG, JPG, SVG. High resolution preferred.</span>
+            </div>
+          </div>
+          <div id="athlete-group" class="form-group">
+            <label>Student Athlete Supporting (First and Last Name) <span class="optional-tag">(optional)</span></label>
+            <input type="text" id="athlete" placeholder="e.g. Alex Johnson">
+          </div>
+          <button class="btn-primary" id="btn-submit">Continue to Payment</button>
+        </div>
+
+      </div>
+
+      <div id="payment-screen" style="display:none;padding:1rem 0">
+        <h2 style="color:#8B1A1A;margin-bottom:.3rem;text-align:center">Complete your payment in 2 easy steps</h2>
+        <div class="pay-box" style="margin-top:1rem">
+          <div class="step-label">Step 1 - Select your payment method</div>
+          <p>Choose how you will be sending your donation.</p>
+        </div>
+        <div class="payment-methods">
+          <div class="pm-option" id="pm-venmo">
+            <div class="pm-icon">&#x1F4F1;</div>
+            <div class="pm-label">Venmo</div>
+          </div>
+          <div class="pm-option" id="pm-cash">
+            <div class="pm-icon">&#x1F4B5;</div>
+            <div class="pm-label">Cash</div>
+          </div>
+          <div class="pm-option" id="pm-check">
+            <div class="pm-icon">&#x1F4DD;</div>
+            <div class="pm-label">Check</div>
+            <div class="pm-sub">Payable to Morgan MTB Race Team Inc.</div>
+          </div>
+        </div>
+        <div id="instructions-venmo" style="display:none;text-align:center">
+          <div class="venmo-box">
+            <div class="amount-big" id="venmo-amount"></div>
+            <p>Send to <span class="venmo-handle">@MorganMTBraceteam</span></p>
+            <p class="note-highlight">Include your name in the Venmo note</p>
+          </div>
+          <a id="venmo-link" class="btn-venmo" target="_blank">
+            <span class="venmo-logo">V</span> Open Venmo
+          </a>
+        </div>
+        <div id="instructions-cash" style="display:none">
+          <div class="info-box">
+            <div class="info-title">Cash Payment</div>
+            <p>Please deliver your cash donation in person to <strong>Mason Van Noy</strong>.<br>2802 W Old Hwy Rd Morgan Utah 84050<br>Reference your name so we can match it to this record.</p>
+          </div>
+        </div>
+        <div id="instructions-check" style="display:none">
+          <div class="info-box">
+            <div class="info-title">Check Payment</div>
+            <p>Please make your check payable to:</p>
+            <p class="payable">Morgan MTB Race Team Inc.</p>
+            <p style="margin-top:.6rem">Mail or deliver your check to <strong>Mason Van Noy</strong>.<br>2802 W Old Hwy Rd Morgan Utah 84050</p>
+          </div>
+        </div>
+        <div class="pay-box" style="margin-top:1.2rem">
+          <div class="step-label">Step 2 - Finalize your donation</div>
+          <p>Once you have sent or delivered your payment, click the button below to complete your donation and request your receipt.</p>
+        </div>
+        <button class="btn-primary" id="btn-complete">I have sent payment - Complete My Donation and Request Receipt</button>
+        <button class="btn-primary" id="btn-back" style="margin-top:.75rem;background:#eee;color:#555;font-size:.85rem">Go Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<div id="team-screen">
+  <div class="hero">
+    <div class="bike-icon">&#x1F3C6;</div>
+    <h1>Our Fundraising Goal</h1>
+    <p>Every donation brings our riders one step closer to race day. Thank you for your support!</p>
+  </div>
+  <div class="team-wrap">
+    <div class="team-card">
+      <h2 id="team-season">2026 Season Goal</h2>
+      <p class="subtitle" id="team-subtitle">Help us reach our goal of $15,000</p>
+      <div class="goal-amounts">
+        <span class="raised" id="team-raised">$0 pledged</span>
+        <span id="team-goal-label">Goal: $15,000</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="team-progress-fill" style="width:0%">
+          <span id="team-pct">0%</span>
+        </div>
+      </div>
+      <div class="goal-stats">
+        <div class="goal-stat"><div class="g-num" id="team-donors">0</div><div class="g-lbl">Donors</div></div>
+        <div class="goal-stat"><div class="g-num" id="team-verified">$0</div><div class="g-lbl">Verified</div></div>
+        <div class="goal-stat"><div class="g-num" id="team-remaining">$15,000</div><div class="g-lbl">Remaining</div></div>
+      </div>
+      <p class="goal-message" id="team-message"></p>
+      <button class="donate-cta" id="btn-team-donate">Make a Donation</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="card">
+    <h2 style="color:#8B1A1A;margin-bottom:1.5rem">Admin Login</h2>
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="admin-pw" placeholder="Enter password">
+    </div>
+    <button class="btn-primary" id="btn-login">Log In</button>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin-screen">
+  <div class="admin-header">
+    <h2>Admin Dashboard</h2>
+    <button class="btn-sm btn-danger" id="btn-logout">Log Out</button>
+  </div>
+  <div class="settings-panel">
+    <strong>Season Settings</strong>
+    <div class="settings-row">
+      <div class="s-group">
+        <label>Season Label</label>
+        <input type="text" id="setting-season" placeholder="e.g. 2026 Season Goal">
+      </div>
+      <div class="s-group">
+        <label>Fundraising Goal ($)</label>
+        <input type="number" id="setting-goal" placeholder="e.g. 15000" min="1">
+      </div>
+      <div class="settings-btns">
+        <button class="btn-sm btn-outline" id="btn-save-settings">Save Settings</button>
+        <button class="btn-sm btn-danger" id="btn-reset-season">Reset Season</button>
+      </div>
+    </div>
+  </div>
+  <div class="stats-row" id="stats-row"></div>
+  <div style="background:#fff;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,.08);overflow:hidden">
+    <div style="padding:1rem 1.2rem;background:#fdf5f5;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0e0e0">
+      <strong style="color:#8B1A1A">Donation Records</strong>
+      <button class="btn-sm btn-outline" id="btn-export">Export CSV</button>
+    </div>
+    <div id="donations-table-wrap"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var STORE_KEY = 'mmtb_donations';
+var SETTINGS_KEY = 'mmtb_settings';
+var selectedMethod = '';
+var donationType = '';
+
+function getDonations() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); }
+  catch(e) { return []; }
+}
+function saveDonations(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+function getSettings() {
+  try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); }
+  catch(e) { return {}; }
+}
+function saveSettings(s) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+function getCurrentGoal() { var s = getSettings(); return s.goal ? parseFloat(s.goal) : 15000; }
+function getCurrentSeason() { var s = getSettings(); return s.season ? s.season : '2026 Season Goal'; }
+
+function showPage(p) {
+  var pages = ['home', 'login', 'admin', 'team'];
+  for (var i = 0; i < pages.length; i++) {
+    document.getElementById(pages[i] + '-screen').style.display = 'none';
+  }
+  document.getElementById(p + '-screen').style.display = 'block';
+  if (p === 'admin') renderAdmin();
+  if (p === 'team') renderTeam();
+  if (p === 'home') resetForm();
+}
+
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type === 'error' ? ' error' : '') + ' show';
+  clearTimeout(t._t);
+  t._t = setTimeout(function() { t.classList.remove('show'); }, 3500);
+}
+
+function getTierForAmount(amount) {
+  if (amount >= 1000) return 'platinum';
+  if (amount >= 750) return 'gold';
+  if (amount >= 500) return 'silver';
+  if (amount >= 250) return 'bronze';
+  return 'none';
+}
+
+function updateTierQualifier() {
+  if (donationType !== 'business') return;
+  var amountEl = document.getElementById('amount');
+  if (!amountEl) return;
+  var amount = parseFloat(amountEl.value);
+  var qualEl = document.getElementById('tier-qualifier');
+  var driveEl = document.getElementById('drive-box-wrap');
+  var tierNames = ['platinum', 'gold', 'silver', 'bronze'];
+
+  if (!qualEl || !driveEl) return;
+
+  if (!amount || isNaN(amount) || amount <= 0) {
+    qualEl.style.display = 'none';
+    driveEl.style.display = 'none';
+    for (var j = 0; j < tierNames.length; j++) {
+      var c = document.getElementById('tier-' + tierNames[j]);
+      if (c) c.className = 'tier-card';
+    }
+    return;
+  }
+
+  var tier = getTierForAmount(amount);
+
+  for (var k = 0; k < tierNames.length; k++) {
+    var card = document.getElementById('tier-' + tierNames[k]);
+    if (card) {
+      card.className = tierNames[k] === tier ? 'tier-card selected' : 'tier-card';
+    }
+  }
+
+  if (tier === 'none') {
+    qualEl.style.display = 'block';
+    qualEl.className = 'tier-qualifier none';
+    qualEl.textContent = 'Donate $250 or more to qualify for a sponsorship tier';
+    driveEl.style.display = 'none';
+  } else {
+    qualEl.style.display = 'block';
+    driveEl.style.display = 'block';
+    if (tier === 'platinum') { qualEl.className = 'tier-qualifier platinum'; qualEl.textContent = 'Platinum Level Sponsor'; }
+    else if (tier === 'gold') { qualEl.className = 'tier-qualifier gold'; qualEl.textContent = 'Gold Level Sponsor'; }
+    else if (tier === 'silver') { qualEl.className = 'tier-qualifier silver'; qualEl.textContent = 'Silver Level Sponsor'; }
+    else if (tier === 'bronze') { qualEl.className = 'tier-qualifier bronze'; qualEl.textContent = 'Bronze Level Sponsor'; }
+  }
+}
+
+function selectDonationType(type) {
+  donationType = type;
+  document.getElementById('type-personal').className = 'type-option' + (type === 'personal' ? ' selected' : '');
+  document.getElementById('type-business').className = 'type-option' + (type === 'business' ? ' selected' : '');
+  document.getElementById('personal-fields').style.display = type === 'personal' ? 'block' : 'none';
+  document.getElementById('business-fields').style.display = type === 'business' ? 'block' : 'none';
+  document.getElementById('shared-fields').style.display = 'block';
+  document.getElementById('athlete-group').style.display = type === 'personal' ? 'block' : 'none';
+  document.getElementById('tier-qualifier').style.display = 'none';
+  document.getElementById('drive-box-wrap').style.display = 'none';
+  document.getElementById('amount').value = '';
+  var tierNames = ['platinum', 'gold', 'silver', 'bronze'];
+  for (var i = 0; i < tierNames.length; i++) {
+    var card = document.getElementById('tier-' + tierNames[i]);
+    if (card) card.className = 'tier-card';
+  }
+}
+
+function selectMethod(method) {
+  selectedMethod = method;
+  var ids = ['venmo', 'cash', 'check'];
+  for (var i = 0; i < ids.length; i++) {
+    var el = document.getElementById('pm-' + ids[i]);
+    var instr = document.getElementById('instructions-' + ids[i]);
+    if (el) el.className = 'pm-option' + (ids[i] === method ? ' selected' : '');
+    if (instr) instr.style.display = ids[i] === method ? 'block' : 'none';
+  }
+}
+
+function submitDonation() {
+  if (!donationType) { showToast('Please select Personal Donation or Business Sponsorship.', 'error'); return; }
+
+  // Get the correct name field based on donation type
+  var name = '';
+  if (donationType === 'personal') {
+    name = (document.getElementById('fname').value || '').trim();
+  } else {
+    name = (document.getElementById('company').value || '').trim();
+  }
+
+  var email   = (document.getElementById('email').value || '').trim();
+  var address = (document.getElementById('address').value || '').trim();
+  var city    = (document.getElementById('city').value || '').trim();
+  var state   = (document.getElementById('state').value || '').trim();
+  var zip     = (document.getElementById('zip').value || '').trim();
+  var amountRaw = document.getElementById('amount').value;
+  var amount  = parseFloat(amountRaw);
+
+  // Get athlete only for personal donations
+  var athlete = '';
+  if (donationType === 'personal') {
+    var athleteEl = document.getElementById('athlete');
+    athlete = athleteEl ? athleteEl.value.trim() : '';
+  }
+
+  var tier = donationType === 'business' ? getTierForAmount(amount) : 'none';
+
+  if (!name) { showToast(donationType === 'personal' ? 'Please enter your name.' : 'Please enter your company name.', 'error'); return; }
+  if (!email || email.indexOf('@') === -1) { showToast('Please enter a valid email.', 'error'); return; }
+  if (!address) { showToast('Please enter your street address.', 'error'); return; }
+  if (!city) { showToast('Please enter your city.', 'error'); return; }
+  if (!state) { showToast('Please enter your state.', 'error'); return; }
+  if (!zip) { showToast('Please enter your ZIP code.', 'error'); return; }
+  if (!amountRaw || isNaN(amount) || amount <= 0) { showToast('Please enter a valid donation amount.', 'error'); return; }
+
+  window._pending = {
+    id:      Date.now(),
+    date:    new Date().toLocaleDateString('en-US'),
+    fname:   name,
+    email:   email,
+    address: address,
+    city:    city,
+    state:   state,
+    zip:     zip,
+    amount:  amount.toFixed(2),
+    athlete: athlete || 'General Support',
+    method:  '',
+    type:    donationType,
+    tier:    tier,
+    status:  'pending'
+  };
+
+  selectedMethod = '';
+  var ids = ['venmo', 'cash', 'check'];
+  for (var i = 0; i < ids.length; i++) {
+    var pmEl = document.getElementById('pm-' + ids[i]);
+    var instrEl = document.getElementById('instructions-' + ids[i]);
+    if (pmEl) pmEl.className = 'pm-option';
+    if (instrEl) instrEl.style.display = 'none';
+  }
+
+  document.getElementById('venmo-amount').textContent = '$' + amount.toFixed(2);
+  var note = encodeURIComponent('Donation - ' + name + ' - Morgan MTB');
+  document.getElementById('venmo-link').href = 'https://venmo.com/MorganMTBraceteam?txn=pay&amount=' + amount.toFixed(2) + '&note=' + note;
+  document.getElementById('donation-form-wrap').style.display = 'none';
+  document.getElementById('payment-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function completeDonation() {
+  if (!selectedMethod) { showToast('Please select a payment method.', 'error'); return; }
+  var d = window._pending;
+  if (!d) { showToast('Something went wrong. Please try again.', 'error'); return; }
+  d.method = selectedMethod;
+  var all = getDonations();
+  all.unshift(d);
+  saveDonations(all);
+  window._pending = null;
+
+  var screen = document.getElementById('payment-screen');
+  screen.innerHTML = '';
+  var h2 = document.createElement('h2');
+  h2.style.color = '#8B1A1A';
+  h2.style.marginBottom = '.5rem';
+  h2.style.textAlign = 'center';
+  h2.textContent = 'Thank You!';
+  var p = document.createElement('p');
+  p.style.fontSize = '.95rem';
+  p.style.color = '#555';
+  p.style.marginBottom = '1.5rem';
+  p.style.lineHeight = '1.6';
+  p.style.textAlign = 'center';
+  p.innerHTML = 'Your donation has been recorded. Once our team verifies your payment, a donation receipt will be sent to <strong>' + d.email + '</strong>.';
+  var btn = document.createElement('button');
+  btn.className = 'btn-primary';
+  btn.style.background = '#eee';
+  btn.style.color = '#555';
+  btn.style.fontSize = '.85rem';
+  btn.textContent = 'Make Another Donation';
+  btn.onclick = function() { showPage('home'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  screen.appendChild(h2);
+  screen.appendChild(p);
+  screen.appendChild(btn);
+}
+
+function resetForm() {
+  var fields = ['fname', 'company', 'email', 'address', 'city', 'state', 'zip', 'amount', 'athlete'];
+  for (var i = 0; i < fields.length; i++) {
+    var f = document.getElementById(fields[i]);
+    if (f) f.value = '';
+  }
+  donationType = '';
+  document.getElementById('type-personal').className = 'type-option';
+  document.getElementById('type-business').className = 'type-option';
+  document.getElementById('personal-fields').style.display = 'none';
+  document.getElementById('business-fields').style.display = 'none';
+  document.getElementById('shared-fields').style.display = 'none';
+  document.getElementById('tier-qualifier').style.display = 'none';
+  document.getElementById('drive-box-wrap').style.display = 'none';
+  document.getElementById('donation-form-wrap').style.display = 'block';
+  document.getElementById('payment-screen').style.display = 'none';
+  var tierNames = ['platinum', 'gold', 'silver', 'bronze'];
+  for (var j = 0; j < tierNames.length; j++) {
+    var card = document.getElementById('tier-' + tierNames[j]);
+    if (card) card.className = 'tier-card';
+  }
+}
+
+function tierLabel(t) {
+  if (t === 'platinum') return 'Platinum';
+  if (t === 'gold') return 'Gold';
+  if (t === 'silver') return 'Silver';
+  if (t === 'bronze') return 'Bronze';
+  return '';
+}
+
+function methodLabel(m) {
+  if (m === 'venmo') return 'Venmo';
+  if (m === 'cash') return 'Cash';
+  if (m === 'check') return 'Check';
+  return 'Unknown';
+}
+
+function renderTeam() {
+  var donations = getDonations();
+  var goal = getCurrentGoal();
+  var season = getCurrentSeason();
+  var totalAll = 0;
+  var totalVerified = 0;
+  for (var i = 0; i < donations.length; i++) {
+    totalAll += parseFloat(donations[i].amount);
+    if (donations[i].status === 'verified') totalVerified += parseFloat(donations[i].amount);
+  }
+  var pct = Math.min(100, Math.round((totalVerified / goal) * 100));
+  var remaining = Math.max(0, goal - totalVerified);
+  document.getElementById('team-season').textContent = season;
+  document.getElementById('team-subtitle').textContent = 'Help us reach our goal of $' + goal.toLocaleString();
+  document.getElementById('team-goal-label').textContent = 'Goal: $' + goal.toLocaleString();
+  document.getElementById('team-raised').textContent = '$' + totalAll.toFixed(2) + ' pledged';
+  document.getElementById('team-donors').textContent = donations.length;
+  document.getElementById('team-verified').textContent = '$' + totalVerified.toFixed(2);
+  document.getElementById('team-remaining').textContent = '$' + remaining.toFixed(2);
+  document.getElementById('team-pct').textContent = pct + '%';
+  document.getElementById('team-progress-fill').style.width = '0%';
+  setTimeout(function() {
+    document.getElementById('team-progress-fill').style.width = pct + '%';
+  }, 100);
+  var msg = '';
+  if (pct >= 100) { msg = 'We have reached our goal! Thank you to every donor who made this possible.'; }
+  else if (pct >= 75) { msg = 'We are almost there! Just <strong>$' + remaining.toFixed(2) + '</strong> away from our goal.'; }
+  else if (pct >= 50) { msg = 'Halfway there! <strong>$' + remaining.toFixed(2) + '</strong> still needed to reach our goal.'; }
+  else { msg = 'We need <strong>$' + remaining.toFixed(2) + '</strong> more to reach our goal. Every dollar counts!'; }
+  document.getElementById('team-message').innerHTML = msg;
+}
+
+function adminLogin() {
+  var pw = document.getElementById('admin-pw').value;
+  hashPassword(pw).then(function(hash) {
+    if (hash === '86395dbfccaff2b3a64cb2b74f7775e5c7f28ac55ce53a22af4e0216419d172e') {
+      document.getElementById('admin-pw').value = '';
+      showPage('admin');
+    } else {
+      showToast('Incorrect password.', 'error');
+    }
+  });
+}
+
+function hashPassword(str) {
+  var buffer = new TextEncoder().encode(str);
+  return crypto.subtle.digest('SHA-256', buffer).then(function(hash) {
+    return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+  });
+}
+
+function renderAdmin() {
+  var s = getSettings();
+  document.getElementById('setting-season').value = s.season || '2026 Season Goal';
+  document.getElementById('setting-goal').value = s.goal || '15000';
+  var donations = getDonations();
+  var total = 0;
+  var totalVerified = 0;
+  for (var i = 0; i < donations.length; i++) {
+    total += parseFloat(donations[i].amount);
+    if (donations[i].status === 'verified') totalVerified += parseFloat(donations[i].amount);
+  }
+  document.getElementById('stats-row').innerHTML =
+    '<div class="stat-card"><div class="num">' + donations.length + '</div><div class="lbl">Total Donations</div></div>'
+    + '<div class="stat-card"><div class="num">$' + total.toFixed(2) + '</div><div class="lbl">Total Pledged</div></div>'
+    + '<div class="stat-card"><div class="num">$' + totalVerified.toFixed(2) + '</div><div class="lbl">Verified and Received</div></div>';
+  if (!donations.length) {
+    document.getElementById('donations-table-wrap').innerHTML = '<div class="empty-state">No donations yet.</div>';
+    return;
+  }
+  var rows = '';
+  for (var j = 0; j < donations.length; j++) {
+    var d = donations[j];
+    var typeBadge = d.type === 'business'
+      ? '<span class="badge badge-' + (d.tier && d.tier !== 'none' ? d.tier : 'personal') + '">' + (d.tier && d.tier !== 'none' ? tierLabel(d.tier) + ' Sponsor' : 'Business') + '</span>'
+      : '<span class="badge badge-personal">Personal</span>';
+    var actionCell = d.status === 'pending'
+      ? '<button class="btn-verify" data-id="' + d.id + '">Verify and Send Receipt</button>'
+      : '<button class="btn-resend" data-resend="' + d.id + '">Resend Receipt</button>';
+    rows += '<tr>'
+      + '<td>' + d.date + '</td>'
+      + '<td><strong>' + d.fname + '</strong><br><span style="font-size:.78rem;color:#888">' + d.email + '</span></td>'
+      + '<td style="font-weight:700;color:#8B1A1A">$' + parseFloat(d.amount).toFixed(2) + '</td>'
+      + '<td style="font-size:.82rem">' + (d.type === 'personal' ? d.athlete : 'N/A') + '</td>'
+      + '<td><span class="badge ' + (d.status === 'verified' ? 'badge-verified' : 'badge-pending') + '">' + (d.status === 'verified' ? 'Verified' : 'Pending') + '</span>'
+      + '<span class="badge badge-method">' + methodLabel(d.method) + '</span>'
+      + typeBadge + '</td>'
+      + '<td>' + actionCell + '</td>'
+      + '</tr>';
+  }
+  document.getElementById('donations-table-wrap').innerHTML =
+    '<table><thead><tr><th>Date</th><th>Donor</th><th>Amount</th><th>Athlete</th><th>Status</th><th>Action</th></tr></thead><tbody>' + rows + '</tbody></table>';
+  var vBtns = document.querySelectorAll('.btn-verify');
+  for (var k = 0; k < vBtns.length; k++) {
+    vBtns[k].addEventListener('click', function() { verifyDonation(parseInt(this.getAttribute('data-id'))); });
+  }
+  var rBtns = document.querySelectorAll('.btn-resend');
+  for (var m = 0; m < rBtns.length; m++) {
+    rBtns[m].addEventListener('click', function() { resendReceipt(parseInt(this.getAttribute('data-resend'))); });
+  }
+}
+
+function verifyDonation(id) {
+  var all = getDonations();
+  var d = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === id) { d = all[i]; break; } }
+  if (!d) return;
+  d.status = 'verified';
+  saveDonations(all);
+  sendReceiptEmail(d);
+  renderAdmin();
+}
+
+function resendReceipt(id) {
+  var all = getDonations();
+  var d = null;
+  for (var i = 0; i < all.length; i++) { if (all[i].id === id) { d = all[i]; break; } }
+  if (!d) return;
+  sendReceiptEmail(d);
+}
+
+function sendReceiptEmail(d) {
+  var existing = document.getElementById('emailjs-sdk');
+  if (!existing) {
+    var s = document.createElement('script');
+    s.id = 'emailjs-sdk';
+    s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    s.onload = function() { doSendEmail(d); };
+    document.head.appendChild(s);
+  } else {
+    doSendEmail(d);
+  }
+}
+
+function doSendEmail(d) {
+  emailjs.init('h1_qLNNAeA8MVNes2');
+  var sponsorLine = d.type === 'business' && d.tier && d.tier !== 'none' ? tierLabel(d.tier) + ' Level Sponsor' : '';
+  emailjs.send('service_1lxfgrs', 'template_n2t0qnp', {
+    to_name:    d.fname,
+    to_email:   d.email,
+    first_name: d.fname,
+    amount:     '$' + parseFloat(d.amount).toFixed(2),
+    date:       d.date,
+    athlete:    d.type === 'personal' ? d.athlete : (sponsorLine || 'Business Donation'),
+    method:     methodLabel(d.method),
+    address:    d.address + ', ' + d.city + ', ' + d.state + ' ' + d.zip,
+    org_name:   'Morgan MTB Race Team Inc.',
+    ein:        '36-4966523'
+  }).then(function() {
+    showToast('Receipt emailed to ' + d.email);
+  }).catch(function(err) {
+    var msg = err && err.text ? err.text : JSON.stringify(err);
+    showToast('Email failed: ' + msg, 'error');
+  });
+}
+
+function exportCSV() {
+  var all = getDonations();
+  if (!all.length) { showToast('No donations to export.', 'error'); return; }
+  var header = ['Date','Name','Email','Address','City','State','ZIP','Amount','Type','Tier','Athlete','Payment Method','Status'];
+  var rows = [header.join(',')];
+  for (var i = 0; i < all.length; i++) {
+    var d = all[i];
+    rows.push([d.date, d.fname, d.email, d.address, d.city, d.state, d.zip, d.amount,
+      d.type || 'personal', tierLabel(d.tier) || 'N/A', d.athlete, methodLabel(d.method), d.status
+    ].map(function(v) { return '"' + v + '"'; }).join(','));
+  }
+  var a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(rows.join('\n'));
+  a.download = 'mmtb_donations.csv';
+  a.click();
+  showToast('CSV exported!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('nav-logo').onclick   = function(e) { e.preventDefault(); showPage('home'); };
+  document.getElementById('nav-team').onclick   = function(e) { e.preventDefault(); showPage('team'); };
+  document.getElementById('nav-admin').onclick  = function(e) { e.preventDefault(); showPage('login'); };
+  document.getElementById('btn-submit').onclick  = submitDonation;
+  document.getElementById('btn-complete').onclick = completeDonation;
+  document.getElementById('btn-back').onclick = function() {
+    document.getElementById('payment-screen').style.display = 'none';
+    document.getElementById('donation-form-wrap').style.display = 'block';
+  };
+  document.getElementById('btn-login').onclick  = adminLogin;
+  document.getElementById('btn-logout').onclick = function() { showPage('home'); };
+  document.getElementById('btn-export').onclick = exportCSV;
+  document.getElementById('btn-team-donate').onclick = function() { showPage('home'); };
+  document.getElementById('admin-pw').onkeydown = function(e) { if (e.key === 'Enter') adminLogin(); };
+  document.getElementById('pm-venmo').onclick = function() { selectMethod('venmo'); };
+  document.getElementById('pm-cash').onclick  = function() { selectMethod('cash'); };
+  document.getElementById('pm-check').onclick = function() { selectMethod('check'); };
+  document.getElementById('type-personal').onclick = function() { selectDonationType('personal'); };
+  document.getElementById('type-business').onclick = function() { selectDonationType('business'); };
+  var amountEl = document.getElementById('amount');
+  amountEl.addEventListener('wheel', function(e) { e.preventDefault(); }, { passive: false });
+  amountEl.oninput = updateTierQualifier;
+  document.getElementById('btn-save-settings').onclick = function() {
+    var season = document.getElementById('setting-season').value.trim();
+    var goal   = parseFloat(document.getElementById('setting-goal').value);
+    if (!season) { showToast('Please enter a season label.', 'error'); return; }
+    if (!goal || goal <= 0) { showToast('Please enter a valid goal amount.', 'error'); return; }
+    saveSettings({ season: season, goal: goal });
+    showToast('Settings saved!');
+  };
+  document.getElementById('btn-reset-season').onclick = function() {
+    if (confirm('Reset the season? This will clear ALL donation records and cannot be undone.')) {
+      localStorage.removeItem(STORE_KEY);
+      showToast('Season reset. All records cleared.');
+      renderAdmin();
+    }
+  };
+  showPage('home');
+});
+</script>
+</body>
+</html>
