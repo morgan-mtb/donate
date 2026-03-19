@@ -429,7 +429,7 @@ function submitDonation() {
     amount:  amount.toFixed(2),
     type:    donationType === 'business' ? 'Business Sponsorship' : 'Personal Donation',
     tier:    donationType === 'business' ? getTierForAmount(amount) : 'N/A',
-    athlete: donationType === 'personal' ? (athlete || 'General Support') : 'N/A',
+    athlete: athlete || 'General Support',
     method:  ''
   };
 
